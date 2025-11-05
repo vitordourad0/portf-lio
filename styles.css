@@ -56,12 +56,34 @@ header {
     border-radius: 16px;
     object-fit: cover; 
     object-position: top;
-    transition: transform 0.3s ease; 
+    position: relative; /* Necessário para o ::before */
+    overflow: hidden; /* Garante que o efeito não vaze */
+    transform-style: preserve-3d; /* Para o efeito 3D */
+    transition: transform 0.2s ease-out; /* Transição para resetar o efeito */
+    perspective: 1000px; /* Perspectiva para o 3D */
 } 
 
+/* Efeito Mouse Tracker na Foto */
+#foto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; /* Área grande de brilho */
+    height: 200%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.5) 0%, transparent 60%);
+    transform: translate(calc(var(--mouse-x, 50%) - 100%), calc(var(--mouse-y, 50%) - 100%));
+}
+
+#foto:hover::before {
+    opacity: 1; /* O brilho aparece no hover */
+}
+
 #foto:hover { 
-    cursor: pointer; 
-    transform: perspective(1000px) rotateY(20deg); 
+    cursor: default; /* Remove o cursor de link, já que o efeito 3D já é o hover */
 } 
 
 .sociais {
@@ -253,53 +275,68 @@ h2 {
     transform: scale(1.2); 
 }
 
-#projeto1, #projeto2, #projeto3{
+.projeto-card { /* Classe comum para todos os projetos */
     background: #fff; 
     padding: 2px; 
     background-clip: padding-box, border-box; 
     background-origin: border-box; 
     border: transparent; 
-
     margin-bottom: 32px;
     width: 100%; 
     height: auto;
     border-radius: 16px;
-    position: relative; 
+    position: relative; /* Essencial para o ::before e transform 3D */
     overflow: hidden; 
     display: flex;
     justify-content: center;
     align-items: center;
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
+    transform-style: preserve-3d; /* Para o efeito 3D */
+    transition: transform 0.2s ease-out; /* Transição para resetar o efeito */
+    perspective: 1000px; /* Perspectiva para o 3D */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra padrão */
 }
 
-#projeto1 img, #projeto2 img, #projeto3 img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 16px;
+/* Efeito Mouse Tracker nos Projetos */
+.projeto-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%; 
+    height: 150%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    transform: translate(calc(var(--mouse-x, 50%) - 75%), calc(var(--mouse-y, 50%) - 75%));
 }
 
+.projeto-card:hover::before {
+    opacity: 1; /* O brilho aparece no hover */
+}
 
+.projeto-card:hover {
+    cursor: default; /* Remove o cursor de link padrão */
+}
+
+/* Sombras específicas ao passar o mouse, mantendo o transform dinâmico */
 #projeto1:hover{
     box-shadow: 0 15px 30px rgba(0, 60, 255, 0.3); 
-    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
-    cursor: none; 
-    transition: ease-in-out 300ms;
 }
 
 #projeto2:hover{
     box-shadow: 0 15px 30px rgba(255, 51, 0, 0.3); 
-    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
-    cursor: none; 
-    transition: ease-in-out 300ms;
 }
 
 #projeto3:hover{
     box-shadow: 0 15px 30px rgba(0, 255, 42, 0.3); 
-    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
-    cursor: none; 
-    transition: ease-in-out 300ms;
+}
+
+.projeto-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
 }
 
 .titulo-projeto {
@@ -315,6 +352,7 @@ h2 {
     margin-bottom: 4px;
 }
 
+/* --- RESPONSIVIDADE (MEDIA QUERIES) --- */
 
 @media (max-width: 992px) {
     .container {

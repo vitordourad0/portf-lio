@@ -14,7 +14,7 @@
         <header> 
             <div class="container"> 
                 <div class="foto-social">
-                    <img id="foto" src="src/imgs/eu.png" alt="GustavoLopesDeBarros"> 
+                    <img id="foto" class="track-mouse-3d" src="src/imgs/eu.png" alt="GustavoLopesDeBarros"> 
                     <div class="sociais">
                         <a href="https://www.linkedin.com/in/gustavo-lopes-barros/" target="_blank" class="social-link">
                             <div class="social-item">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <div id="projeto1">
+                <div id="projeto1" class="projeto-card track-mouse-3d">
                     <img src="src/imgs/projeto1.png" alt="projeto1">
                 </div>
                 <a href="https://www.figma.com/proto/FA9yXMoSyUVB8CGixxxdcd/Site-Acad%C3%AAmico-IHC?node-id=45-14&t=4EhLVfnZeohJQLrS-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=45%3A14" target="_blank" id="button">Clique aqui para ver o protótipo interativo</a>
@@ -132,7 +132,7 @@
                         <h4> (AINDA EM DESENVOLVIMENTO)</h4>
                     </div>
                 </div>
-                <div id="projeto2">
+                <div id="projeto2" class="projeto-card track-mouse-3d">
                     <img src="src/imgs/projeto2.png" alt="projeto2">
                 </div>
                 <a href="https://www.instagram.com/cromniponto/" target="_blank">Instagram</a>
@@ -148,12 +148,51 @@
                         <h4>Finalizado</h4>
                     </div>
                 </div>
-                <div id="projeto3">
+                <div id="projeto3" class="projeto-card track-mouse-3d">
                     <img src="src/imgs/projeto3.png" alt="projeto3">
                 </div>
                 <a href="https://www.figma.com/proto/1pUOMwejiuxC20EKZV3OUi/Case-Study-Presentation-Template-%F0%9F%94%AE--Community-?node-id=1-266&p=f&t=Zl0ATU86yyhpRO53-0&scaling=contain&content-scaling=fixed&page-id=0%3A1" target="_blank" id="button">Clique aqui para ver o Case Study</a>
             </div> 
         </div> 
         
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const elementsToTrack = document.querySelectorAll('.track-mouse-3d');
+                const rotationFactor = 10; // Intensidade da rotação (maior valor = mais rotação)
+                const scaleFactor = 1.02; // Escala ao hover
+
+                elementsToTrack.forEach(element => {
+                    element.addEventListener('mousemove', (e) => {
+                        const rect = element.getBoundingClientRect();
+                        const x = e.clientX - rect.left; // Posição X do mouse dentro do elemento
+                        const y = e.clientY - rect.top;  // Posição Y do mouse dentro do elemento
+
+                        // Posição normalizada (-0.5 a 0.5) em relação ao centro do elemento
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const normalizedX = (x - centerX) / centerX; // -1 a 1
+                        const normalizedY = (y - centerY) / centerY; // -1 a 1
+
+                        // Calcula as rotações baseadas na posição do mouse
+                        // Invertemos Y para que mover o mouse para cima incline para cima, etc.
+                        const rotateY = normalizedX * rotationFactor; // Rotação no eixo Y (movimento horizontal do mouse)
+                        const rotateX = -normalizedY * rotationFactor; // Rotação no eixo X (movimento vertical do mouse)
+
+                        element.style.transform = `perspective(1000px) scale(${scaleFactor}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                        
+                        // Atualiza as variáveis CSS para o efeito de brilho
+                        element.style.setProperty('--mouse-x', `${x}px`);
+                        element.style.setProperty('--mouse-y', `${y}px`);
+                    });
+
+                    element.addEventListener('mouseleave', () => {
+                        // Reseta o transform e o brilho ao sair
+                        element.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
+                        element.style.setProperty('--mouse-x', `50%`); // Reseta o brilho para o centro
+                        element.style.setProperty('--mouse-y', `50%`);
+                    });
+                });
+            });
+        </script>
     </body> 
 </html>
