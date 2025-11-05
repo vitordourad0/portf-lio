@@ -142,6 +142,10 @@ a {
     font-weight: bold;
 } 
 
+a:hover{
+    color: #116363;
+}
+
 p {
     font-size: 14pt; 
     font-family: 'Sora', sans-serif; 
