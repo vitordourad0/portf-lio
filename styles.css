@@ -224,7 +224,7 @@ h2 {
     transform: scale(1.2); 
 }
 
-#projeto1, #projeto2 {
+#projeto1, #projeto2, #projeto3{
     background: #fff; 
     padding: 2px; 
     background-clip: padding-box, border-box; 
@@ -237,7 +237,6 @@ h2 {
     border-radius: 16px;
     position: relative; 
     overflow: hidden; 
-    /* Centraliza o conteúdo (incluindo o #button) */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,7 +244,7 @@ h2 {
     transform: perspective(1000px);
 }
 
-#projeto1:hover, #projeto2:hover{
+#projeto1:hover, #projeto2:hover, #projeto3:hover{
     cursor: none; 
     transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
