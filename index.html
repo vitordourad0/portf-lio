@@ -32,7 +32,7 @@
                 </div>
                 <div class="texto"> 
                     <h1>Gustavo Lopes de Barros</h1> 
-                    <h3>UX/UI & Data Analyst Intern</h3> 
+                    <h3>UX/UI Intern</h3> 
                     <p>
                         Entusiasta de tecnologia e design, atualmente estudante de Análise e Desenvolvimento de Sistemas.
                         Minha paixão está em criar experiências de usuário intuitivas e eficientes, utilizando dados para embasar cada decisão de design. 
@@ -104,6 +104,49 @@
                             <span class="label-habilidade">GitHub</span>
                         </div>
                     </div>
+
+                    <div class="categoria-titulo-container">
+                        <img src="src/imgs/lamp.svg" style="height: 24px; filter: invert(100%);" alt="dev icon">
+                        <h5 class="categoria-titulo">Metodologias</h5>
+                    </div>
+                    <div class="metodologias-list" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 8px;"> 
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">User Experience (FIAP-Projetos)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Design Thinking (FIAP-Projetos-Livro)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Kanban (FATEC-Cromni)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Userflow (FATEC-Projetos)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Persona (FIAP-Projetos)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">UX Research (FIAP-Cromni)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Design System (Cromni)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">System Colors (Projetos)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Teoria das Cores (FATEC-Projetos)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">Teoria das Formas (FATEC-Projetos)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">60 30 10 (FATEC-Projetos-Youtube)</span>
+                        </div>
+                        <div class="item-habilidade">
+                            <span class="label-habilidade">The 4px rule (Projetos-Youtube)</span>
+                        </div>
+                    </div>
                 </div> 
             </div> 
             
@@ -158,37 +201,32 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const elementsToTrack = document.querySelectorAll('.track-mouse-3d');
-                const rotationFactor = 10; // Intensidade da rotação (maior valor = mais rotação)
-                const scaleFactor = 1.02; // Escala ao hover
+                const rotationFactor = 10;
+                const scaleFactor = 1.02;
 
                 elementsToTrack.forEach(element => {
                     element.addEventListener('mousemove', (e) => {
                         const rect = element.getBoundingClientRect();
-                        const x = e.clientX - rect.left; // Posição X do mouse dentro do elemento
-                        const y = e.clientY - rect.top;  // Posição Y do mouse dentro do elemento
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
 
-                        // Posição normalizada (-0.5 a 0.5) em relação ao centro do elemento
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
-                        const normalizedX = (x - centerX) / centerX; // -1 a 1
-                        const normalizedY = (y - centerY) / centerY; // -1 a 1
+                        const normalizedX = (x - centerX) / centerX;
+                        const normalizedY = (y - centerY) / centerY;
 
-                        // Calcula as rotações baseadas na posição do mouse
-                        // Invertemos Y para que mover o mouse para cima incline para cima, etc.
-                        const rotateY = normalizedX * rotationFactor; // Rotação no eixo Y (movimento horizontal do mouse)
-                        const rotateX = -normalizedY * rotationFactor; // Rotação no eixo X (movimento vertical do mouse)
+                        const rotateY = normalizedX * rotationFactor;
+                        const rotateX = -normalizedY * rotationFactor;
 
                         element.style.transform = `perspective(1000px) scale(${scaleFactor}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                         
-                        // Atualiza as variáveis CSS para o efeito de brilho
                         element.style.setProperty('--mouse-x', `${x}px`);
                         element.style.setProperty('--mouse-y', `${y}px`);
                     });
 
                     element.addEventListener('mouseleave', () => {
-                        // Reseta o transform e o brilho ao sair
                         element.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
-                        element.style.setProperty('--mouse-x', `50%`); // Reseta o brilho para o centro
+                        element.style.setProperty('--mouse-x', `50%`);
                         element.style.setProperty('--mouse-y', `50%`);
                     });
                 });
