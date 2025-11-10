@@ -327,7 +327,7 @@ h2 {
 
 /* Sombras específicas ao passar o mouse, mantendo o transform dinâmico */
 #projeto1:hover{
-    box-shadow: 0 15px 30px rgba(0, 60, 255, 0.3); 
+    box-shadow: 0 15px 30px rgba(0, 255, 0, 0.3); 
 }
 
 #projeto2:hover{
